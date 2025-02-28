@@ -13,7 +13,7 @@ function Chart({ data }) {
         outerRadius={100}
         fill="#8884d8"
         dataKey="participation"
-        nameKey="firstName"
+        nameKey="first_name"
       >
         {data.map((_, index) => (
           <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />

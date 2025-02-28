@@ -8,7 +8,7 @@ function App() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    api.get("/data")
+    api.get("data/")
       .then((response) => setData(response.data))
       .catch((error) => console.error("Erro ao buscar dados:", error));
   }, []);

@@ -11,8 +11,8 @@ function Table({ data }) {
         <tbody>
           {data.map((item, index) => (
             <tr key={index}>
-              <td>{item.firstName}</td>
-              <td>{item.lastName}</td>
+              <td>{item.first_name}</td>
+              <td>{item.last_name}</td>
               <td>{item.participation}%</td>
             </tr>
           ))}

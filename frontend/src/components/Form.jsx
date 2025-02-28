@@ -2,7 +2,7 @@ import { useState } from "react";
 import api from "../services/api";
 
 function Form({ setData }) {
-  const [form, setForm] = useState({ firstName: "", lastName: "", participation: "" });
+  const [form, setForm] = useState({ first_name: "", last_name: "", participation: "" });
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -10,15 +10,16 @@ function Form({ setData }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!form.firstName || !form.lastName || !form.participation) {
+    if (!form.first_name || !form.last_name || !form.participation) {
       alert("Todos os campos são obrigatórios!");
       return;
     }
     
     try {
-      const response = await api.post("/data", form);
-      setData(response.data); // Atualiza a tabela e o gráfico
-      setForm({ firstName: "", lastName: "", participation: "" });
+      const response = await api.post("data/add/", form);
+      console.log("Response data:", response.data);
+      setData(response.data);
+      setForm({ first_name: "", last_name: "", participation: "" });
     } catch (error) {
       console.error("Erro ao enviar dados:", error);
     }
@@ -26,8 +27,8 @@ function Form({ setData }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input type="text" name="firstName" placeholder="First name" value={form.firstName} onChange={handleChange} required />
-      <input type="text" name="lastName" placeholder="Last name" value={form.lastName} onChange={handleChange} required />
+      <input type="text" name="first_name" placeholder="First name" value={form.first_name} onChange={handleChange} required />
+      <input type="text" name="last_name" placeholder="Last name" value={form.last_name} onChange={handleChange} required />
       <input type="number" name="participation" placeholder="Participation" value={form.participation} onChange={handleChange} required />
       <button type="submit">Enviar</button>
     </form>
