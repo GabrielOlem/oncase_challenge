@@ -8,7 +8,7 @@ import json
 
 @api_view(['GET'])
 def get_data(request):
-    participants = Participant.objects.all()
+    participants = Participant.objects.all().order_by("participation")
     serializer = ParticipantSerializer(participants, many=True)
     return Response(serializer.data)
 
@@ -17,7 +17,7 @@ def add_data(request):
     serializer = ParticipantSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
-        participants = Participant.objects.all()
+        participants = Participant.objects.all().order_by("participation")
         serialized_data = ParticipantSerializer(participants, many=True)
         return Response(serialized_data.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

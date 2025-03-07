@@ -1,0 +1,26 @@
+.form-container {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .form-container input {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    width: 200px;
+  }
+  
+  .form-container button {
+    padding: 10px 50px;
+    border: solid;
+    background-color: #00AEEF;
+    color: #ffffff;
+    border-radius: 0px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .form-container button:hover {
+    background-color: #363535;
+  }
+  

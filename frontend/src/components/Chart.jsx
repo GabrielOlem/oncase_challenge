@@ -1,26 +1,43 @@
-import { PieChart, Pie, Cell, Legend, Tooltip } from "recharts";
-
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#FF0000"];
+import { PieChart, Pie, Cell, Legend, Tooltip, LabelList } from "recharts";
 
 function Chart({ data }) {
+  const updatedData = data.map(item => ({
+    ...item,
+    full_name: `${item.first_name} ${item.last_name}`,
+  }));
+
+  const getRandomColor = (index) => {
+    const hue = (index * 137.5) % 360;
+    return `hsl(${hue}, 70%, 60%)`;
+  };
+
   return (
-    <PieChart width={400} height={300}>
+    <PieChart width={500} height={300}>
       <Pie
-        data={data}
-        cx="50%"
+        data={updatedData}
+        cx="40%"
         cy="50%"
         labelLine={false}
-        outerRadius={100}
+        outerRadius={115}
+        innerRadius={65}
         fill="#8884d8"
         dataKey="participation"
-        nameKey="first_name"
+        nameKey="full_name"
+        paddingAngle={1}
       >
-        {data.map((_, index) => (
-          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+        {updatedData.map((_, index) => (
+          <Cell key={`cell-${index}`} fill={getRandomColor(index)} />
         ))}
       </Pie>
       <Tooltip />
-      <Legend />
+      <Legend 
+        layout="vertical" 
+        align="right" 
+        verticalAlign="middle" 
+        iconType="square"
+        iconSize={20}
+        wrapperStyle={{ lineHeight: "40px", fontWeight: "bold" }}
+      />
     </PieChart>
   );
 }
