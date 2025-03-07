@@ -16,12 +16,10 @@ function App() {
 
   return (
     <div className="container">
-      {/* 🔹 Header Section */}
       <header>
-        <Form setData={setData} />
+        <Form setData={setData} existingData={data} />
       </header>
 
-      {/* 🔹 Data Section */}
       <section className="data-section">
         <h2>DATA</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>

@@ -16,6 +16,12 @@ def get_data(request):
 def add_data(request):
     serializer = ParticipantSerializer(data=request.data)
     if serializer.is_valid():
+        total_participation = sum(Participant.objects.values_list("participation", flat=True))
+        new_participation = serializer.validated_data["participation"]
+
+        if total_participation + new_participation > 100:
+            return Response({"error": "Total participation cannot exceed 100%"}, status=status.HTTP_400_BAD_REQUEST)
+
         serializer.save()
         participants = Participant.objects.all().order_by("participation")
         serialized_data = ParticipantSerializer(participants, many=True)
