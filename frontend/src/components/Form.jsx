@@ -18,6 +18,11 @@ function Form({ setData, existingData }) {
       return;
     }
     
+    if (form.participation < 1 || form.participation > 100) {
+      alert("Participation must be within the range [1, 100]");
+      return;
+    }
+
     const totalParticipation = existingData.reduce(
       (sum, item) => sum + parseFloat(item.participation || 0),
       0
